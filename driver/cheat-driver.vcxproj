@@ -107,6 +107,7 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\core\cheat\mouse.cpp" />
     <ClCompile Include="source\core\cheat\rw.cpp" />
     <ClCompile Include="source\core\ioctl\ioctl.cpp" />
     <ClCompile Include="source\core\sdk\sdk.cpp" />

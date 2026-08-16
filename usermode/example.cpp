@@ -1,8 +1,5 @@
 #include "kernel.hpp"
-#include <cstring>
-#include <handleapi.h>
 #include <iostream>
-#include <winuser.h>
 #include <TlHelp32.h>
 
 DWORD getPid(const char processName[]){
@@ -41,4 +38,8 @@ int main() {
     std::cout << "readed value = " << number << std::endl;
 
     write_memory<int>(driver, pid, (PVOID)0x868B8FF2C0, 69);
+
+    while(true) {
+        move_mouse(driver, 5, 10, 0x00);
+    }
 }

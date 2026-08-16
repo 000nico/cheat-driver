@@ -5,6 +5,7 @@
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
 bool open_driver(HANDLE* hDriver);
+void move_mouse(HANDLE driver, long x, long y, short flags);
 
 template<typename T> T read_memory(HANDLE driver, DWORD pid, PVOID address) {
     T response = { };
