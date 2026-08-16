@@ -1,11 +1,19 @@
-typedef struct READ_REQUEST {
+#pragma once
+#include <ntifs.h>
+
+#define FILE_DEVICE_DRIVER 0x8000
+
+#define IOCTL_READ CTL_CODE(FILE_DEVICE_DRIVER, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define IOCTL_WRITE CTL_CODE(FILE_DEVICE_DRIVER, 0x801, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+struct READ_REQUEST {
     HANDLE ProcessId;
     PVOID  Address;
     PVOID  Buffer;
     SIZE_T Size;
 };
 
-typedef struct WRITE_REQUEST {
+struct WRITE_REQUEST {
     HANDLE ProcessId;
     PVOID  Address;
     PVOID  Buffer;

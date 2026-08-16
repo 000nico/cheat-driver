@@ -1,27 +1,28 @@
 #include "cheat.hpp"
 #include "../api/structs.hpp"
+#include "../ioctl/shared.h"
 
-NTSTATUS read(HANDLE ProcessId, PVOID Address, PVOID buffer, SIZE_T BufferSize) {
+NTSTATUS read(READ_REQUEST* request) {
 	PEPROCESS source = 0;
 	SIZE_T ReturnSize;
-	NTSTATUS status = PsLookupProcessByProcessId(ProcessId, &source);
+	NTSTATUS status = PsLookupProcessByProcessId(request->ProcessId, &source);
 	if (!NT_SUCCESS(status)) return status;
 
-	status = MmCopyVirtualMemory(source, Address, PsGetCurrentProcess(), buffer, BufferSize, UserMode, &ReturnSize);
+	status = MmCopyVirtualMemory(source, request->Address, PsGetCurrentProcess(), request->Buffer, request->Size, UserMode, &ReturnSize);
 	
 	ObDereferenceObject(source);
 
 	return status;
 }
 
-NTSTATUS write(HANDLE ProcessId, PVOID buffer, PVOID TargetAddress, SIZE_T BufferSize) {
+NTSTATUS write(WRITE_REQUEST* request) {
 	PEPROCESS source = 0;
 	SIZE_T ReturnSize;
 
-	NTSTATUS status = PsLookupProcessByProcessId(ProcessId, &source);
+	NTSTATUS status = PsLookupProcessByProcessId(request->ProcessId, &source);
 	if (!NT_SUCCESS(status)) return status;
 
-	status = MmCopyVirtualMemory(PsGetCurrentProcess(), buffer, source, TargetAddress, BufferSize, UserMode, &ReturnSize);
+	status = MmCopyVirtualMemory(PsGetCurrentProcess(), request->Buffer, source, request->Address, request->Size, UserMode, &ReturnSize);
 
 	ObDereferenceObject(source);
 

@@ -1,5 +1,7 @@
-#include <ntddk.h>
+#pragma once
+#include <ntifs.h>
 #include <wdf.h>
 
-#define IOCTL_READ CTL_CODE(FILE_DEVICE_DRIVER, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#define IOCTL_WRITE CTL_CODE(FILE_DEVICE_DRIVER, 0x801, METHOD_BUFFERED, FILE_ANY_ACCESS)
+EVT_WDF_DRIVER_DEVICE_ADD DriverEvtDeviceAdd;
+NTSTATUS DriverEvtDeviceAdd(WDFDRIVER Driver, PWDFDEVICE_INIT DeviceInit);
+VOID DriverEvtIoDeviceControl(_In_ WDFQUEUE Queue, _In_ WDFREQUEST Request, _In_ size_t OutputBufferLength, size_t InputBufferLength, _In_ ULONG IoControlCode);

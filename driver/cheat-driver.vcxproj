@@ -113,11 +113,10 @@
     <ClCompile Include="source\driver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\core\api\structs.hpp" />
     <ClInclude Include="source\core\cheat\cheat.hpp" />
     <ClInclude Include="source\core\ioctl\ioctl.hpp" />
+    <ClInclude Include="source\core\ioctl\shared.h" />
     <ClInclude Include="source\core\sdk\sdk.hpp" />
-    <ClInclude Include="source\driver.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #pragma once
-#include <ntifs.h>
+#include "../ioctl/shared.h"
 
-NTSTATUS read(HANDLE ProcessId, PVOID Address, PVOID buffer, SIZE_T BufferSize);
-NTSTATUS write(HANDLE ProcessId, PVOID buffer, PVOID TargetAddress, SIZE_T BufferSize);
+NTSTATUS read(READ_REQUEST* request);
+NTSTATUS write(WRITE_REQUEST* request);
